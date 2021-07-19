@@ -13,7 +13,7 @@ webhooks:
     clientConfig:
       service:
         name: "validating-webhook"
-        namespace: "kube-addons"
+        namespace: "oversold"
         path: /print
       caBundle: ${CA_BUNDLE}
     admissionReviewVersions: ["v1", "v1beta1"]

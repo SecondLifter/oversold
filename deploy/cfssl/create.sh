@@ -9,7 +9,7 @@ cfssl gencert --ca dac-ca.pem --ca-key dac-ca-key.pem --config dac-gencert.json 
 
 kubectl create secret generic \
         dynamic-admission-control-certs \
-        --namespace kube-addons \
+        --namespace oversold \
         --from-file=dac.pem \
         --from-file=dac-key.pem
 

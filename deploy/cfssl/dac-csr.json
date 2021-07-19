@@ -17,10 +17,10 @@
         "127.0.0.1",
         "localhost",
         "mutating-webhook",
-        "mutating-webhook.kube-addons",
-        "mutating-webhook.kube-addons.svc",
+        "mutating-webhook.oversold",
+        "mutating-webhook.oversold.svc",
         "validating-webhook",
-        "validating-webhook.kube-addons",
-        "validating-webhook.kube-addons.svc"
+        "validating-webhook.oversold",
+        "validating-webhook.oversold.svc"
     ]
 }

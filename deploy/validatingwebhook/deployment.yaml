@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: validating-webhook
-  namespace: kube-addons
+  namespace: oversold
   labels:
     app: validating-webhook
 spec:

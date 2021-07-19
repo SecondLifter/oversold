@@ -2,20 +2,20 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   name: "mutating-webhook.mritd.me"
-  namespace: kube-addons
+  namespace: oversold
 webhooks:
   - name: "mutating-webhook.mritd.me"
     rules:
       - apiGroups:   [""]
         apiVersions: ["v1"]
         operations:  ["CREATE","UPDATE"]
-        resources:   ["pods"]
-        scope:       "Namespaced"
+        resources:   ["nodes/status"]
+        scope:       "*"
     clientConfig:
       service:
         name: "mutating-webhook"
-        namespace: "kube-addons"
-        path: /mutating/print
+        namespace: "oversold"
+        path: /mutating/oversold
       caBundle: ${CA_BUNDLE}
     admissionReviewVersions: ["v1", "v1beta1"]
     sideEffects: None

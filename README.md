@@ -22,7 +22,7 @@
 ```bash
 cd oversold
 docker build -t goadmission:v0.9 . #构建镜像
-kubectl create ns kube-addons  #创建命名空间
+kubectl create ns oversold  #创建命名空间
 sh oversold/deploy/cfssl/create.sh #生成密钥
 cd oversold/cfssl/mutatingwebhook/
 kubectl apply -f .
