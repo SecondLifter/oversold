@@ -15,7 +15,7 @@ webhooks:
       service:
         name: "mutating-webhook"
         namespace: "kube-addons"
-        path: /print
+        path: /mutating/print
       caBundle: ${CA_BUNDLE}
     admissionReviewVersions: ["v1", "v1beta1"]
     sideEffects: None
