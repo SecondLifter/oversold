@@ -19,7 +19,4 @@ webhooks:
     admissionReviewVersions: ["v1", "v1beta1"]
     sideEffects: None
     timeoutSeconds: 5
-    failurePolicy: Ignore
-    namespaceSelector:
-      matchLabels:
-        validating-webhook.mritd.me: "true"
+    failurePolicy: Ignores

@@ -21,6 +21,3 @@ webhooks:
     sideEffects: None
     timeoutSeconds: 5
     failurePolicy: Ignore
-    namespaceSelector:
-      matchLabels:
-        mutating-webhook.mritd.me: "true"
