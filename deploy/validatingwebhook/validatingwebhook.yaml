@@ -5,16 +5,16 @@ metadata:
 webhooks:
   - name: "validating-webhook.mritd.me"
     rules:
-      - apiGroups:   [""]
+      - apiGroups:   ["apps"]
         apiVersions: ["v1"]
         operations:  ["CREATE","UPDATE"]
-        resources:   ["pods"]
+        resources:   ["deployments"]
         scope:       "Namespaced"
     clientConfig:
       service:
         name: "validating-webhook"
         namespace: "oversold"
-        path: /print
+        path: /validating/check-deploy
       caBundle: ${CA_BUNDLE}
     admissionReviewVersions: ["v1", "v1beta1"]
     sideEffects: None
