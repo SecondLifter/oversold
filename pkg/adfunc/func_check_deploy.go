@@ -37,11 +37,12 @@ func checkDeploy(request *admissionv1.AdmissionRequest) (*admissionv1.AdmissionR
 		}
 		//namespace
 		if len(deploy.Namespace) == 0 {
+			klog.Error(deploy.Name + "Namespace is null")
 			return &admissionv1.AdmissionResponse{
 				Allowed: false,
 				Result: &metav1.Status{
 					Code:    http.StatusBadRequest,
-					Message: "Namespace is null",
+					Message: deploy.Name + "Namespace is null",
 				},
 			}, nil
 		}
@@ -57,35 +58,40 @@ func checkDeploy(request *admissionv1.AdmissionRequest) (*admissionv1.AdmissionR
 
 		//Tolerations
 		if len(deploy.Spec.Template.Spec.Tolerations) == 0 {
+			klog.Error(deploy.Name + "Tolerations is null ")
 			return &admissionv1.AdmissionResponse{
 				Allowed: false,
 				Result: &metav1.Status{
 					Code:    http.StatusBadRequest,
-					Message: "Tolerations is null ",
+					Message: deploy.Name + "Tolerations is null ",
 				},
 			}, nil
 		}
 		//Probe and Resources
 		for _, v := range deploy.Spec.Template.Spec.Containers {
 			//ReadinessProbe or LivenessProbe
-			if v.ReadinessProbe == nil || v.LivenessProbe == nil {
-				return &admissionv1.AdmissionResponse{
-					Allowed: false,
-					Result: &metav1.Status{
-						Code:    http.StatusBadRequest,
-						Message: "ReadinessProbe is null ",
-					},
-				}, nil
-			}
-			//ignore web
-			if cheklego(deploy.Name) != "lego" {
-				if len(v.Resources.Limits) == 0 || len(v.Resources.Requests) == 0 {
-					klog.Info("Resource is nil")
+
+			if v.Name != "fluent-bit-container" {
+				if v.ReadinessProbe == nil || v.LivenessProbe == nil {
+					klog.Warningf(deploy.Name + " ReadinessProbe or LivenessProbe is null ")
 					return &admissionv1.AdmissionResponse{
 						Allowed: false,
 						Result: &metav1.Status{
 							Code:    http.StatusBadRequest,
-							Message: "Resources is null ",
+							Message: deploy.Name + v.Name + " ReadinessProbe or LivenessProbe is null ",
+						},
+					}, nil
+				}
+			}
+			//ignore web
+			if cheklego(deploy.Name) != "lego" {
+				if len(v.Resources.Limits) == 0 || len(v.Resources.Requests) == 0 {
+					klog.Error(deploy.Name + "Resource is nil")
+					return &admissionv1.AdmissionResponse{
+						Allowed: false,
+						Result: &metav1.Status{
+							Code:    http.StatusBadRequest,
+							Message: deploy.Name + "Resources is null ",
 						},
 					}, nil
 				}
