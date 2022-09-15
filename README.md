@@ -18,11 +18,14 @@
 ### 三、如何使用
 
 克隆本项目到本地，在本地使用docker 对代码进行容器构建。再到k8s集群进行部署
+> 前置条件 
+>需要cfssl 命令行工具
 
 ```bash
 cd oversold
 docker build -t goadmission:v0.9 . #构建镜像
 kubectl create ns oversold  #创建命名空间
+
 sh oversold/deploy/cfssl/create.sh #生成密钥
 cd oversold/cfssl/mutatingwebhook/
 kubectl apply -f .
