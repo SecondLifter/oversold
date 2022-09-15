@@ -38,53 +38,6 @@ func oversold(request *admissionv1.AdmissionRequest) (*admissionv1.AdmissionResp
 			}, nil
 		}
 		//判断是否该节点需要进行超售
-		/*
-			if node.Labels["Kubernetes.io/oversold"] =="auto"{
-				klog.Info(request.UserInfo.Username +"的label为kubernetes.io/oversold:" +node.Labels["kubernetes.io/oversold"])
-				klog.Info(request.UserInfo.Username +"===================该节点开启自动超售========================")
-
-				patches := []Patch{
-					{
-						Option: PatchOptionReplace,
-						Path:   "/status/allocatable/cpu",
-						//Value: "32",
-						Value:  overcpu(Quantitytostring(node.Status.Allocatable.Cpu()),strconv.Itoa(cpuutil(node.Name))),
-					},
-					{
-						Option: PatchOptionReplace,
-						Path:   "/status/allocatable/memory",
-						//Value:  "134217728Ki",
-						Value: overmem(Quantitytostring(node.Status.Allocatable.Memory()),strconv.Itoa(memutil(node.Name))),
-					},
-				}
-				//klog.Info(overcpu(Quantitytostring(node.Status.Allocatable.Cpu()),node.Labels["kubernetes.io/overcpu"]))
-				//klog.Info(overmem(Quantitytostring(node.Status.Allocatable.Memory()),node.Labels["kubernetes.io/overmem"]))
-				patch, err := jsoniter.Marshal(patches)
-				if err != nil {
-					errMsg := fmt.Sprintf("[route.Mutating] /oversold: failed to marshal patch: %v", err)
-					logger.Error(errMsg)
-					return &admissionv1.AdmissionResponse{
-						Allowed: false,
-						Result: &metav1.Status{
-							Code:    http.StatusInternalServerError,
-							Message: errMsg,
-						},
-					}, nil
-				}
-				logger.Infof("[route.Mutating] /oversold: patches: %s", string(patch))
-				return &admissionv1.AdmissionResponse{
-					Allowed:   true,
-					Patch:     patch,
-					PatchType: JSONPatch(),
-					Result: &metav1.Status{
-						Code:    http.StatusOK,
-						Message: "success",
-					},
-				}, nil
-
-
-			}
-		*/
 		if node.Labels["kubernetes.io/oversold"] != "oversold" {
 
 			return &admissionv1.AdmissionResponse{

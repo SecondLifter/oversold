@@ -1,6 +1,7 @@
 FROM golang:1.16-alpine AS builder
 
 ENV GO111MODULE on
+ENV GOPROXY=https://goproxy.cn,direct
 ENV SRC_PATH ${GOPATH}/src/github.com/mritd/goadmission
 
 WORKDIR ${SRC_PATH}

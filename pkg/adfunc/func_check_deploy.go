@@ -55,7 +55,6 @@ func checkDeploy(request *admissionv1.AdmissionRequest) (*admissionv1.AdmissionR
 				},
 			}, nil
 		}
-
 		//Tolerations
 		if len(deploy.Spec.Template.Spec.Tolerations) == 0 {
 			klog.Error(deploy.Name + "Tolerations is null ")
