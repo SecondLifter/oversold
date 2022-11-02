@@ -107,6 +107,12 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&conf.Cert, "cert", "", "Admission Controller TLS cert")
 	rootCmd.PersistentFlags().StringVar(&conf.Key, "key", "", "Admission Controller TLS cert key")
 
+	//adfunc  deployment_r
+	rootCmd.PersistentFlags().StringVar(&conf.Namespaces, "namespace", "kube-system,kube-public,default", "ignore namespace")
+	rootCmd.PersistentFlags().BoolVar(&conf.RunAsNonRoot, "RunAsNonRoot", false, "true or false to use NoRoot default false")
+	rootCmd.PersistentFlags().Int64Var(&conf.UserID, "RunAsUser", 5000, "user id")
+	rootCmd.PersistentFlags().Int64Var(&conf.GroupId, "RunAsGroup", 5000, "user id")
+
 	// adfunc image_rename
 	rootCmd.PersistentFlags().StringSliceVar(&conf.ImageRename, "image-rename", conf.DefaultImageRenameRules, "Pod image name rename rules")
 	// adfunc check_deploy_time

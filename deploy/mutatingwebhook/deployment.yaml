@@ -23,6 +23,9 @@ spec:
           args:
             - --cert=/etc/kubernetes/ssl/dac.pem
             - --key=/etc/kubernetes/ssl/dac-key.pem
+          env:
+            - name: env
+              value: test
           livenessProbe:
             httpGet:
               scheme: HTTPS

@@ -1,12 +1,16 @@
 package conf
 
 var (
-	Cert string
-	Key  string
-	Addr string
+	Cert         string
+	Key          string
+	Addr         string
+	Namespaces   string
+	RunAsNonRoot bool
+	UserID       int64
+	GroupId      int64
 )
-
 var ImageRename []string
+
 var DefaultImageRenameRules = []string{
 	"k8s.gcr.io/=gcrxio/k8s.gcr.io_",
 	"gcr.io/kubernetes-helm/=gcrxio/gcr.io_kubernetes-helm_",
